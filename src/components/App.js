@@ -2,7 +2,9 @@
 import React, {useEffect,useState} from "react";
 
 const API ='https://dog.ceo/api/breeds/image/random'
+
 function  DogImage() {
+
     const[image , setImage] = useState(null) 
     useEffect(()=>{
         fetch (API)
@@ -10,6 +12,10 @@ function  DogImage() {
         .then(data=>setImage(data.message))
 
     },[])
+
+    if(!image){
+        return <p>"Loading ..."</p>
+    }
     return(
     <div>
         <p>loading...</p>
