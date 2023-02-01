@@ -3,26 +3,24 @@ import React, {useEffect,useState} from "react";
 
 const API ='https://dog.ceo/api/breeds/image/random'
 
-function  DogImage() {
-
-    const[image , setImage] = useState(null) 
-    useEffect(()=>{
-        fetch (API)
-        .then(res=>res.json())
-        .then(data=>setImage(data.message))
-
+function DogImage (){
+    const [image, setImage] = useState("")
+    const [isLoading, setLoading] = useState(true)
+    useEffect(() => {
+        fetch(API)
+        .then ((res) => res.json())
+        .then((data) => {
+        setImage(data.message)
+        setLoading(false)
+    })
     },[])
-
-    if(!image){
-        return <p>"Loading ..."</p>
-    }
-    return(
-    <div>
-        <p>loading...</p>
-        <img src={image} alt="A Random Dog"/>
-
-    </div>
-    );
+        return (
+            <p>
+                {isLoading && <span>Loading...</span>}
+                {image && <img src={image} alt= "A Random Dog"></img>}
+            </p>
+        );
+      
 }
 export default DogImage
 
